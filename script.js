@@ -62,17 +62,15 @@ window.addEventListener('scroll', () => {
 const contactForm = document.getElementById('contact-form');
 
 contactForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    
-    // Get form values
-    const formData = new FormData(contactForm);
-    const name = contactForm.querySelector('input[type="text"]').value;
-    const email = contactForm.querySelector('input[type="email"]').value;
-    const phone = contactForm.querySelector('input[type="tel"]').value;
-    const message = contactForm.querySelector('textarea').value;
+    // Get form values for validation
+    const name = contactForm.querySelector('input[name="name"]').value;
+    const email = contactForm.querySelector('input[name="email"]').value;
+    const phone = contactForm.querySelector('input[name="phone"]').value;
+    const message = contactForm.querySelector('textarea[name="message"]').value;
     
     // Simple validation
     if (!name || !email || !phone || !message) {
+        e.preventDefault();
         alert('Please fill in all fields.');
         return;
     }
@@ -80,29 +78,13 @@ contactForm.addEventListener('submit', (e) => {
     // Email validation
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
+        e.preventDefault();
         alert('Please enter a valid email address.');
         return;
     }
     
-    // In a real application, you would send this data to a server
-    // For now, we'll just show a success message
-    alert('Thank you for your message! We will contact you soon.');
-    contactForm.reset();
-    
-    // You can integrate with a backend service here:
-    // fetch('/api/contact', {
-    //     method: 'POST',
-    //     headers: { 'Content-Type': 'application/json' },
-    //     body: JSON.stringify({ name, email, phone, message })
-    // })
-    // .then(response => response.json())
-    // .then(data => {
-    //     alert('Thank you for your message! We will contact you soon.');
-    //     contactForm.reset();
-    // })
-    // .catch(error => {
-    //     alert('Sorry, there was an error sending your message. Please try again.');
-    // });
+    // If validation passes, let Netlify handle the form submission
+    // The form will submit normally and Netlify will process it
 });
 
 // Add animation on scroll (optional enhancement)

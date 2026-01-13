@@ -1,0 +1,5 @@
+# Netlify redirects file
+# This file should be in your publish directory (usually root or dist)
+
+# Redirect form submissions to success page
+/form-success /success.html 200
